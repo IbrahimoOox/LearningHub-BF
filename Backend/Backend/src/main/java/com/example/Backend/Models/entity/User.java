@@ -25,16 +25,16 @@ public class User {
     private String lastName;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = true)
-    private Role role; // Using enum for roles
+    @Column(nullable = false, length = 20)
+    private Role role;
 
     @Column(nullable = true)
-    private String profilePicture; // URL de l'image de profil
+    private String profilePicture;
 
-    // New field for professor verification
     @Column(nullable = true)
-    private String verificationDocument; // URL or path to the verification document
+    private String verificationDocument;
 
+    // Default constructor
     public User() {}
 
     public User(String username, String email, String password, String firstName, String lastName, Role role, String profilePicture, String verificationDocument) {
@@ -49,7 +49,6 @@ public class User {
     }
 
     // Getters and Setters
-
     public Long getId() {
         return id;
     }

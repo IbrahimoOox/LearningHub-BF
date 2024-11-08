@@ -10,12 +10,12 @@ public class SecurityConfig{
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/api/auth/register-user") // Disable CSRF protection for the register endpoint
+                        .ignoringRequestMatchers("/api/auth/register-user")
                 )
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/auth/register-user").permitAll() // Allow registration without authentication
-                        .requestMatchers("/api/auth/login").permitAll() // Allow login without authentication
-                        .anyRequest().authenticated() // All other endpoints require authentication
+                        .requestMatchers("/api/auth/register-user").permitAll()
+                        .requestMatchers("/api/auth/login").permitAll()
+                        .anyRequest().authenticated()
                 );
 
         return http.build();

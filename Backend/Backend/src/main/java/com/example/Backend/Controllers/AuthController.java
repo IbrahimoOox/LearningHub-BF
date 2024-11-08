@@ -18,20 +18,20 @@ public class AuthController {
     public ResponseEntity<String> registerUser(@Valid @RequestBody UserRegistrationDTO userRegistrationDTO) {
         try {
             authService.registerUser(userRegistrationDTO);
-            return ResponseEntity.ok("User registered successfully with default role.");
+            return ResponseEntity.ok("User registered successfully with role: " + userRegistrationDTO.getRole());
         } catch (Exception e) {
-            // Log the exception if needed
             return ResponseEntity.status(400).body("Registration failed: " + e.getMessage());
         }
     }
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password) {
-        boolean success = authService.loginUser(username, password);
-        if (success) {
-            return ResponseEntity.ok("Login successful");
+
+        String role = authService.loginUser(username, password);
+        if (role != null) {
+            return ResponseEntity.ok("Login Succesful. Role: " + role);
         } else {
-            return ResponseEntity.status(401).body("Invalid credentials");
+            return ResponseEntity.status(401).body("Invalid login , Try again");
         }
     }
 }

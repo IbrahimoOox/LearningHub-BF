@@ -25,25 +25,25 @@ public class Course {
 
     @ManyToOne
     @JoinColumn(name = "professor_id", nullable = false)
-    private User professor; // Association with the User entity
+    private User professor;
 
     @ElementCollection
-    private List<String> materials; // List of course materials (e.g., links, files)
+    private List<String> materials;
 
     @Column(nullable = true)
-    private String syllabus; // URL or path to the course syllabus
+    private String syllabus;
 
     @Column(nullable = true)
-    private Integer duration; // Duration in hours
+    private Integer duration;
 
     @Column(nullable = true)
-    private String level; // Course level (e.g., Beginner, Intermediate, Advanced)
+    private String level;
 
     @Column(nullable = false, updatable = false)
-    private LocalDateTime createdDate; // Creation date of the course
+    private LocalDateTime createdDate;
 
     public Course() {
-        this.createdDate = LocalDateTime.now(); // Set creation date to now
+        this.createdDate = LocalDateTime.now();
     }
 
 }

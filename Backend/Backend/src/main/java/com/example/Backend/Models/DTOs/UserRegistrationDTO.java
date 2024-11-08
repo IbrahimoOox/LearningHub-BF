@@ -1,6 +1,5 @@
 package com.example.Backend.Models.DTOs;
 
-import com.example.Backend.Models.entity.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -19,10 +18,12 @@ public class UserRegistrationDTO {
     @NotBlank(message = "Password is required")
     @Size(min = 8, message = "Password must be at least 8 characters long")
     private String password;
+
     private String firstName;
     private String lastName;
     private String profilePicture;
     private String verificationDocument;
 
-
+    @NotBlank(message = "Role is required")
+    private String role;
 }

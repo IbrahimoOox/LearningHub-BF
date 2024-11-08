@@ -24,17 +24,24 @@ public class AuthService {
         user.setFirstName(userRegistrationDTO.getFirstName());
         user.setLastName(userRegistrationDTO.getLastName());
         user.setProfilePicture(userRegistrationDTO.getProfilePicture());
-         user.setRole(Role.USER); // Assigning the default role directly
         user.setVerificationDocument(userRegistrationDTO.getVerificationDocument());
+
+
+        try {
+            Role role = Role.fromString(userRegistrationDTO.getRole());
+            user.setRole(role);
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Invalid role provided: " + userRegistrationDTO.getRole());
+        }
 
         userRepository.save(user);
     }
 
-    public boolean loginUser(String username, String password) {
+    public String loginUser(String username, String password) {
         User user = userRepository.findByUsername(username);
         if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-            return true;
+            return user.getRole().toString();
         }
-        return false;
+        return null;
     }
 }
