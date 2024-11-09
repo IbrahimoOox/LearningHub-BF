@@ -10,7 +10,7 @@ public class SecurityConfig{
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/api/auth/register-user")
+                        .ignoringRequestMatchers("/api/auth/login")
                 )
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/auth/register-user").permitAll()

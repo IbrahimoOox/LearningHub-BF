@@ -1,6 +1,7 @@
 package com.example.Backend.Controllers;
 
 import com.example.Backend.Models.DTOs.UserRegistrationDTO;
+import com.example.Backend.Models.DTOs.UserLoginDTO; // Import the UserLoginDTO
 import com.example.Backend.Services.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,13 +26,12 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password) {
-
-        String role = authService.loginUser(username, password);
+    public ResponseEntity<String> login(@Valid @RequestBody UserLoginDTO userLoginDTO) { // Updated to use UserLoginDTO
+        String role = authService.loginUser(userLoginDTO.getUsername(), userLoginDTO.getPassword());
         if (role != null) {
-            return ResponseEntity.ok("Login Succesful. Role: " + role);
+            return ResponseEntity.ok("Login Successful. Role: " + role);
         } else {
-            return ResponseEntity.status(401).body("Invalid login , Try again");
+            return ResponseEntity.status(401).body("Invalid login, try again.");
         }
     }
 }
